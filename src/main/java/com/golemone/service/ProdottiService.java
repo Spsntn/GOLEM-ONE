@@ -30,7 +30,7 @@ public class ProdottiService {
         prodottiRepository.findById(id).orElseThrow(() -> new ProdottiNotFoundException(id));
         return prodottiRepository.findById(id)
                 .map(prodotto -> {
-                    if(!prodotto.getNome_prodotto().equals(updatedProdotto.getNome_prodotto()) && updatedProdotto.getNome_prodotto()!=null)
+                    if(!prodotto.getNome_prodotto().equals(updatedProdotto.getNome_prodotto()) && updatedProdotto.getNome_prodotto()!=null && !updatedProdotto.getNome_prodotto().equals(""))
                         prodotto.setNome_prodotto(updatedProdotto.getNome_prodotto());
                     if(prodotto.getPrezzo()!=updatedProdotto.getPrezzo() && updatedProdotto.getPrezzo()!=0.0)
                         prodotto.setPrezzo(updatedProdotto.getPrezzo());
