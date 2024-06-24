@@ -49,11 +49,11 @@ public class OrdiniService {
 
 
             Scontrini temp = scontriniRepository.findByOrdini_Id(id);
-            System.out.println(temp.toString());
 
-            temp.getOrdini().remove(ordiniRepository.findById(id).get());
-            scontriniRepository.save(temp);
-
+            if(temp!=null) {
+                temp.getOrdini().remove(ordiniRepository.findById(id).get());
+                scontriniRepository.save(temp);
+            }
 
             // Rimuovi l'entità corrente dal contesto di persistenza
             ordiniRepository.delete(ordine);
@@ -67,8 +67,10 @@ public class OrdiniService {
 
             // Salva la nuova entità
             ordiniRepository.save(newOrdine);
+            if(temp!=null){
             temp.getOrdini().add(newOrdine);
             scontriniRepository.save(temp);
+            }
             return newOrdine;
         });
     }
